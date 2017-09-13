@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class MainViewController: UIViewController {
 
@@ -16,8 +17,33 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    // Changes the status bar color from black to white depending on the background color of the view
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return isOn ? .default : .lightContent
+    }
+    
+    // This function incorporates AVFoundation. This function specifically makes it possible for the user to turn their flashlight on, on their device
+    func toggleTorch(on: Bool) {
+        
+        guard let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo) else { return }
+        
+        if device.hasTorch {
+            do {
+                try device.lockForConfiguration()
+                
+                if on == true {
+                    device.torchMode = .on
+                } else {
+                    device.torchMode = .off
+                }
+                
+                device.unlockForConfiguration()
+            } catch {
+                print("Torch could not be used.")
+            }
+        } else {
+            print("Torch is not available.")
+        }
     }
     
     @IBOutlet weak var onOffButton: UIButton!
@@ -25,6 +51,7 @@ class MainViewController: UIViewController {
         if isOn == false {
             
             isOn = true
+            toggleTorch(on: true)
             
             onOffButton.setTitle("OFF", for: .normal)
             onOffButton.setTitleColor(.black, for: .normal)
@@ -36,6 +63,7 @@ class MainViewController: UIViewController {
         } else {
             
             isOn = false
+            toggleTorch(on: false)
             
             onOffButton.setTitle("ON", for: .normal)
             onOffButton.setTitleColor(.white, for: .normal)
