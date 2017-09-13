@@ -55,7 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				95CBD1C81F68A7AE00E8C526 /* Main.storyboard */,
-				95CBD1D71F68AAE900E8C526 /* MainViewController.swift */,
+				95CBD1D91F68DF9B00E8C526 /* ViewControllers */,
 				95CBD1D61F68A7C500E8C526 /* Resources */,
 			);
 			path = Flashlight;
@@ -70,6 +70,14 @@
 				95CBD1D01F68A7AE00E8C526 /* Info.plist */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		95CBD1D91F68DF9B00E8C526 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				95CBD1D71F68AAE900E8C526 /* MainViewController.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
